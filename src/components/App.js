@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {Form, FormControl, Button} from 'react-bootstrap';
+import Note from './Node';
+import {bake_cookie, read_cookie, delete_cookie} from 'sfcookies';
 
-
+const cookie_key='NOTES';
 
 class App extends Component{
     constructor(){
@@ -12,18 +14,21 @@ class App extends Component{
             notes:[]
         }
     }
+    componentDidMount(){
+        const notes=read_cookie(cookie_key);
+        this.setState({notes} );
+}
 
     submit(){
-        const notes =this.state.notes;
-
-        const newNote={text: this.state.text};
-        notes.push(newNote);
-        this.setState({notes: notes})
+        const {notes, text} =this.state;
+        notes.push({text});
+        this.setState({notes});
+        bake_cookie(cookie_key, this.state.notes);
     }
     render(){
         return(
-            <div>
-                <h2>Do zrobienia na dziś</h2>
+            <div className="top">
+                <h2>co dziś porabiamy?</h2>
                 <Form inline>
                     <FormControl onChange={event=>this.setState({text: event.target.value})}/>
                     {' '}
@@ -31,7 +36,7 @@ class App extends Component{
                 </Form>
                 {this.state.notes.map((note, index)=> {
                     return (
-                        <div>{note.text}</div>
+                        <Note key={index} note={note}/>
                     )
                 })}
             </div>

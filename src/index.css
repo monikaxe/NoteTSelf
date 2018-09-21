@@ -1,4 +1,26 @@
 body{
+    background-color: aliceblue;
     text-align: center;
     padding: 5%;
+}
+/*.title{*/
+    /*background-color: lightgray;*/
+    /*border: 2px solid lightblue;*/
+    /*border-radius: 8px;*/
+
+/*}*/
+
+.note{
+    border: 1px solid lightblue;
+    border-radius: 8px;
+    font-size: large;
+    font-style: italic;
+    text-align: left;
+    padding: 10px;
+    margin:50px;
+}
+.top{
+    font-size: larger;
+    font-weight: bold;
+    font-style: italic;
 }
